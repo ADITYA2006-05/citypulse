@@ -1,0 +1,272 @@
+.navbar {
+  position: sticky;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin: 0 auto;
+  max-width: 1200px;
+  width: calc(100% - 32px);
+  padding: 10px 24px;
+  border-radius: 16px !important;
+  background: rgba(13, 17, 30, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.pulseDot {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-cyan);
+  position: relative;
+  display: inline-block;
+}
+
+.pulseDot::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 1px solid var(--accent-cyan);
+  border-radius: 50%;
+  animation: pulseGlow 1.8s infinite ease-in-out;
+}
+
+.logoText {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.logoAccent {
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.navLink:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.active {
+  color: var(--accent-cyan) !important;
+  background: rgba(0, 242, 254, 0.08) !important;
+}
+
+.adminLink:hover {
+  background: rgba(138, 43, 226, 0.1);
+}
+
+.activeAdmin {
+  color: #c084fc !important;
+  background: rgba(138, 43, 226, 0.15) !important;
+  border: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 6px 6px 14px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.userName {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.userRole {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.logoutBtn {
+  background: rgba(255, 94, 98, 0.1);
+  border: 1px solid rgba(255, 94, 98, 0.2);
+  color: #ff5e62;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.logoutBtn:hover {
+  background: #ff5e62;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Mobile styles */
+.mobileMenuToggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navLinks, .actions {
+    display: none;
+  }
+  
+  .mobileMenuToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    right: -1px;
+    margin-top: 10px;
+    padding: 16px;
+    background: rgba(13, 17, 30, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(20px);
+  }
+
+  .mobileNavLink {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+  }
+
+  .mobileNavLink:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-primary);
+  }
+
+  .mobileActive {
+    background: rgba(0, 242, 254, 0.08);
+    color: var(--accent-cyan);
+  }
+
+  .mobileActiveAdmin {
+    background: rgba(138, 43, 226, 0.15);
+    color: #c084fc;
+  }
+
+  .mobileUserArea {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 14px;
+    margin-top: 4px;
+  }
+
+  .mobileUserWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .mobileUserInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobileUserName {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .mobileUserRole {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .mobileLogoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid rgba(255, 94, 98, 0.3);
+    color: #ff5e62;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.8rem;
+    transition: var(--transition-smooth);
+  }
+
+  .mobileLogoutBtn:hover {
+    background: rgba(255, 94, 98, 0.1);
+  }
+}
