@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 export interface IssueReport {
   id: string;
   title: string;
@@ -28,9 +25,7 @@ export interface Comment {
   createdAt: string;
 }
 
-const DB_FILE = path.join(process.cwd(), 'mock-db.json');
-
-// Premium starter seeds
+// Premium starter seeds (in-memory, no filesystem dependency)
 const INITIAL_REPORTS: IssueReport[] = [
   {
     id: 'report-1',
@@ -46,7 +41,7 @@ const INITIAL_REPORTS: IssueReport[] = [
     reporterName: 'Sarah Jenkins',
     reporterEmail: 'sarah.j@example.com',
     upvotes: 34,
-    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(), // 3 days ago
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
@@ -63,7 +58,7 @@ const INITIAL_REPORTS: IssueReport[] = [
     reporterName: 'Marcus Vance',
     reporterEmail: 'marcus.v@example.com',
     upvotes: 12,
-    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(), // 5 days ago
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
@@ -80,7 +75,7 @@ const INITIAL_REPORTS: IssueReport[] = [
     reporterName: 'David Chen',
     reporterEmail: 'dchen@example.com',
     upvotes: 48,
-    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(), // 1 day ago
+    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
@@ -119,39 +114,15 @@ const INITIAL_COMMENTS: Comment[] = [
   }
 ];
 
-function initDb() {
-  if (!fs.existsSync(DB_FILE)) {
-    const data = {
-      reports: INITIAL_REPORTS,
-      comments: INITIAL_COMMENTS
-    };
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
-  }
-}
-
-export function getDbData(): { reports: IssueReport[]; comments: Comment[] } {
-  initDb();
-  try {
-    const content = fs.readFileSync(DB_FILE, 'utf-8');
-    return JSON.parse(content);
-  } catch (error) {
-    console.error('Error reading mock db file:', error);
-    return { reports: INITIAL_REPORTS, comments: INITIAL_COMMENTS };
-  }
-}
-
-function writeDbData(data: { reports: IssueReport[]; comments: Comment[] }) {
-  try {
-    fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), 'utf-8');
-  } catch (error) {
-    console.error('Error writing mock db file:', error);
-  }
-}
+// In-memory store (no filesystem, compatible with Cloudflare Workers)
+let memoryDb: { reports: IssueReport[]; comments: Comment[] } = {
+  reports: [...INITIAL_REPORTS],
+  comments: [...INITIAL_COMMENTS],
+};
 
 export const mockDb = {
   getReports: async (filters?: { category?: string; status?: string; search?: string }): Promise<IssueReport[]> => {
-    const { reports } = getDbData();
-    let filtered = [...reports];
+    let filtered = [...memoryDb.reports];
 
     if (filters) {
       if (filters.category && filters.category !== 'ALL') {
@@ -175,11 +146,10 @@ export const mockDb = {
   },
 
   getReportById: async (id: string): Promise<IssueReport | null> => {
-    const { reports, comments } = getDbData();
-    const report = reports.find(r => r.id === id);
+    const report = memoryDb.reports.find(r => r.id === id);
     if (!report) return null;
 
-    const reportComments = comments.filter(c => c.issueId === id);
+    const reportComments = memoryDb.comments.filter(c => c.issueId === id);
     return {
       ...report,
       comments: reportComments.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
@@ -187,7 +157,6 @@ export const mockDb = {
   },
 
   createReport: async (data: Omit<IssueReport, 'id' | 'upvotes' | 'createdAt' | 'updatedAt'>): Promise<IssueReport> => {
-    const db = getDbData();
     const newReport: IssueReport = {
       ...data,
       id: 'report-' + Math.random().toString(36).substr(2, 9),
@@ -195,39 +164,33 @@ export const mockDb = {
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
     };
-    db.reports.push(newReport);
-    writeDbData(db);
+    memoryDb.reports.push(newReport);
     return newReport;
   },
 
   updateReport: async (id: string, data: Partial<IssueReport>): Promise<IssueReport> => {
-    const db = getDbData();
-    const index = db.reports.findIndex(r => r.id === id);
+    const index = memoryDb.reports.findIndex(r => r.id === id);
     if (index === -1) throw new Error(`Report not found with id: ${id}`);
 
     const updated = {
-      ...db.reports[index],
+      ...memoryDb.reports[index],
       ...data,
       updatedAt: new Date().toISOString()
     };
 
-    db.reports[index] = updated;
-    writeDbData(db);
+    memoryDb.reports[index] = updated;
     return updated;
   },
 
   upvoteReport: async (id: string): Promise<IssueReport> => {
-    const db = getDbData();
-    const index = db.reports.findIndex(r => r.id === id);
+    const index = memoryDb.reports.findIndex(r => r.id === id);
     if (index === -1) throw new Error(`Report not found with id: ${id}`);
 
-    db.reports[index].upvotes += 1;
-    writeDbData(db);
-    return db.reports[index];
+    memoryDb.reports[index].upvotes += 1;
+    return memoryDb.reports[index];
   },
 
   createComment: async (issueId: string, content: string, isAdmin: boolean): Promise<Comment> => {
-    const db = getDbData();
     const newComment: Comment = {
       id: 'comment-' + Math.random().toString(36).substr(2, 9),
       issueId,
@@ -235,8 +198,7 @@ export const mockDb = {
       isAdmin,
       createdAt: new Date().toISOString()
     };
-    db.comments.push(newComment);
-    writeDbData(db);
+    memoryDb.comments.push(newComment);
     return newComment;
   }
 };
