@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CityPulse – README
 
-## Getting Started
+## 🌆 Overview
 
-First, run the development server:
+**CityPulse** is a modern web platform designed to provide users with real-time city insights, urban updates, and smart location-based information through an interactive and user-friendly interface. It helps users stay connected with city events, trends, services, and important updates in one centralized platform.
+
+CityPulse
+
+---
+
+## 🚀 Features
+
+* 📍 **Real-Time City Updates** – Get live information about your city.
+* 🗺️ **Interactive Dashboard** – Easy navigation with responsive UI.
+* 🔎 **Smart Search** – Quickly find city services, events, and updates.
+* 📊 **Data Visualization** – Displays city trends and analytics clearly.
+* 📱 **Responsive Design** – Works seamlessly on desktop, tablet, and mobile.
+* ⚡ **Fast Performance** – Optimized for speed and smooth user experience.
+* 🔒 **Secure & Reliable** – Built with secure deployment practices.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* **HTML5**
+* **CSS3**
+* **JavaScript**
+
+### Deployment / Hosting
+
+* [Cloudflare Workers](https://workers.cloudflare.com/?utm_source=chatgpt.com)
+
+### Optional Libraries / Tools
+
+* Responsive UI Components
+* Modern Web APIs
+* REST API integration support
+
+---
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+CityPulse/
+│── index.html
+│── style.css
+│── script.js
+│── assets/
+│── components/
+└── README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Installation & Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Clone the repository:
 
-## Learn More
+```bash
+git clone <repository-url>
+```
 
-To learn more about Next.js, take a look at the following resources:
+2. Navigate to the project folder:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cd citypulse
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. Run locally:
 
-## Deploy on Vercel
+```bash
+Open index.html in browser
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌍 Live Demo
+
+🔗 [CityPulse Live Website](https://citypulse.medhaa.workers.dev/?utm_source=chatgpt.com)
+
+---
+
+## 🎯 Use Cases
+
+* Smart city monitoring
+* Local event discovery
+* Urban analytics dashboards
+* Community information sharing
+
+---
+
+## 📈 Future Enhancements
+
+* AI-powered city recommendations
+* User login & personalization
+* Push notifications
+* Live map integration
+
+---
+
+## 👨‍💻 Author
+
+Developed by **Medhaa** 🚀
