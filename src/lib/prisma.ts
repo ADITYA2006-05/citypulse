@@ -4,22 +4,34 @@ import { Pool } from 'pg';
 import { mockDb, IssueReport, Comment } from './mockDb';
 
 let prisma: PrismaClient | null = null;
-const isDbConfigured = !!process.env.DATABASE_URL;
+let prismaInitialized = false;
 
-if (isDbConfigured) {
+function getPrisma(): PrismaClient | null {
+  if (prismaInitialized) return prisma;
+  prismaInitialized = true;
+
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    console.log('DATABASE_URL not set. Using mock database.');
+    return null;
+  }
+
   try {
-    const connectionString = process.env.DATABASE_URL;
     const pool = new Pool({ connectionString });
     const adapter = new PrismaPg(pool);
     prisma = new PrismaClient({ adapter });
+    console.log('Prisma Client initialized successfully.');
   } catch (error) {
     console.error('Failed to initialize Prisma Client with Pg Adapter:', error);
+    prisma = null;
   }
+  return prisma;
 }
 
 export const db = {
   getReports: async (filters?: { category?: string; status?: string; search?: string }): Promise<IssueReport[]> => {
-    if (prisma) {
+    const client = getPrisma();
+    if (client) {
       try {
         const whereClause: any = {};
         if (filters) {
@@ -38,7 +50,7 @@ export const db = {
             ];
           }
         }
-        const reports = await prisma.issueReport.findMany({
+        const reports = await client.issueReport.findMany({
           where: whereClause,
           orderBy: [
             { upvotes: 'desc' },
@@ -59,9 +71,10 @@ export const db = {
   },
 
   getReportById: async (id: string): Promise<IssueReport | null> => {
-    if (prisma) {
+    const client = getPrisma();
+    if (client) {
       try {
-        const report = await prisma.issueReport.findUnique({
+        const report = await client.issueReport.findUnique({
           where: { id },
           include: {
             comments: {
@@ -100,9 +113,10 @@ export const db = {
     reporterName?: string | null;
     reporterEmail?: string | null;
   }): Promise<IssueReport> => {
-    if (prisma) {
+    const client = getPrisma();
+    if (client) {
       try {
-        const r = await prisma.issueReport.create({
+        const r = await client.issueReport.create({
           data: {
             title: data.title,
             description: data.description,
@@ -132,13 +146,14 @@ export const db = {
   },
 
   updateReport: async (id: string, data: Partial<IssueReport>): Promise<IssueReport> => {
-    if (prisma) {
+    const client = getPrisma();
+    if (client) {
       try {
         const cleanData = { ...data };
         delete cleanData.id;
         delete cleanData.comments;
         
-        const r = await prisma.issueReport.update({
+        const r = await client.issueReport.update({
           where: { id },
           data: cleanData as any
         });
@@ -156,9 +171,10 @@ export const db = {
   },
 
   upvoteReport: async (id: string): Promise<IssueReport> => {
-    if (prisma) {
+    const client = getPrisma();
+    if (client) {
       try {
-        const r = await prisma.issueReport.update({
+        const r = await client.issueReport.update({
           where: { id },
           data: {
             upvotes: { increment: 1 }
@@ -178,9 +194,10 @@ export const db = {
   },
 
   createComment: async (issueId: string, content: string, isAdmin: boolean): Promise<Comment> => {
-    if (prisma) {
+    const client = getPrisma();
+    if (client) {
       try {
-        const c = await prisma.comment.create({
+        const c = await client.comment.create({
           data: {
             issueId,
             content,
