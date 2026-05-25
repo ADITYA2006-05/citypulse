@@ -67,6 +67,22 @@
       "upvotes": 19,
       "createdAt": "2026-05-14T08:10:40.797Z",
       "updatedAt": "2026-05-23T08:10:40.797Z"
+    },
+    {
+      "title": "deep pothole",
+      "description": "the pothole is present on very high traffic road",
+      "category": "POTHOLE",
+      "severity": "HIGH",
+      "status": "RESOLVED",
+      "address": "a s rao nagar near pista house",
+      "latitude": 40.783166920701,
+      "longitude": -73.95868692160275,
+      "reporterName": "Director Sterling",
+      "reporterEmail": "admin@citypulse.gov",
+      "id": "report-keevmw76s",
+      "upvotes": 0,
+      "createdAt": "2026-05-25T06:34:33.494Z",
+      "updatedAt": "2026-05-25T06:35:24.476Z"
     }
   ],
   "comments": [

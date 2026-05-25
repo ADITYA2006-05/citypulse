@@ -30,7 +30,7 @@
   transform: translate(-50%, -50%);
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, rgba(138, 43, 226, 0.06) 40%, rgba(0, 0, 0, 0) 70%);
+  background: radial-gradient(circle, rgba(30, 123, 120, 0.08) 0%, rgba(112, 71, 198, 0.04) 40%, rgba(0, 0, 0, 0) 70%);
   z-index: -1;
   pointer-events: none;
   filter: blur(40px);
@@ -45,8 +45,8 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(28, 20, 15, 0.03);
+  border: 1px solid rgba(28, 20, 15, 0.08);
   padding: 6px 14px;
   border-radius: 30px;
   margin-bottom: 24px;
@@ -54,8 +54,8 @@
 }
 
 .badgeLine:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(28, 20, 15, 0.06);
+  border-color: rgba(28, 20, 15, 0.15);
 }
 
 .badgeLineText {
@@ -79,7 +79,7 @@
 }
 
 .gradientText {
-  background: linear-gradient(135deg, var(--accent-cyan) 0%, #a855f7 50%, var(--accent-pink) 100%);
+  background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-purple) 60%, var(--accent-cyan) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -132,7 +132,8 @@
   margin-bottom: 30px;
   align-items: center;
   justify-content: space-between;
-  background: rgba(13, 17, 30, 0.5) !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid var(--panel-border);
   flex-wrap: wrap;
 }
 
@@ -153,7 +154,7 @@
 .searchInput {
   width: 100%;
   padding: 12px 16px 12px 48px;
-  background: rgba(255, 255, 255, 0.02);
+  background: #ffffff;
   border: 1px solid var(--panel-border);
   border-radius: 10px;
   color: var(--text-primary);
@@ -165,7 +166,8 @@
 .searchInput:focus {
   outline: none;
   border-color: var(--accent-cyan);
-  background: rgba(255, 255, 255, 0.04);
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(30, 123, 120, 0.1);
 }
 
 .filtersGroup {
@@ -189,7 +191,7 @@
 
 .filterSelect {
   padding: 12px 16px 12px 38px;
-  background: rgba(255, 255, 255, 0.03);
+  background: #ffffff;
   border: 1px solid var(--panel-border);
   border-radius: 10px;
   color: var(--text-primary);
@@ -204,10 +206,11 @@
 
 .filterSelect:focus {
   border-color: var(--accent-cyan);
+  box-shadow: 0 0 10px rgba(30, 123, 120, 0.1);
 }
 
 .filterSelect option {
-  background: #0f1322;
+  background: #ffffff;
   color: var(--text-primary);
 }
 
@@ -238,7 +241,7 @@
 .spinner {
   width: 40px;
   height: 40px;
-  border: 3px solid rgba(255, 255, 255, 0.05);
+  border: 3px solid rgba(28, 20, 15, 0.05);
   border-top-color: var(--accent-cyan);
   border-radius: 50%;
   animation: spin 1s infinite linear;
@@ -256,9 +259,9 @@
   gap: 12px;
   padding: 16px 20px;
   border-radius: 12px !important;
-  border-color: rgba(239, 68, 68, 0.2) !important;
-  background: rgba(239, 68, 68, 0.05) !important;
-  color: #f87171;
+  border-color: rgba(223, 59, 59, 0.2) !important;
+  background: rgba(223, 59, 59, 0.05) !important;
+  color: #df3b3b;
   font-size: 0.95rem;
 }
 
@@ -275,7 +278,8 @@
   border-radius: 20px !important;
   max-width: 600px;
   margin: 0 auto;
-  background: rgba(13, 17, 30, 0.3) !important;
+  background: rgba(255, 255, 255, 0.4) !important;
+  border: 1px solid var(--panel-border);
 }
 
 .emptyIcon {

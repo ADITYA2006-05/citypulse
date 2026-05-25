@@ -1,37 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Quicksand:wght@300..700&display=swap');
 
 :root {
-  /* Premium Dark Theme Variables */
-  --bg-main: #060913;
-  --bg-gradient: radial-gradient(circle at 50% 0%, #151130 0%, #060913 70%);
-  --panel-bg: rgba(13, 17, 30, 0.7);
-  --panel-border: rgba(255, 255, 255, 0.07);
-  --panel-border-hover: rgba(255, 255, 255, 0.15);
+  /* Warm Premium Light Theme Variables */
+  --bg-main: #fdfbf7;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #fff7ed 0%, #fdfbf7 70%);
+  --panel-bg: rgba(255, 255, 255, 0.8);
+  --panel-border: rgba(212, 199, 184, 0.4);
+  --panel-border-hover: rgba(182, 163, 142, 0.6);
   
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
+  --text-primary: #2c241e;
+  --text-secondary: #5c4e43;
+  --text-muted: #8c7b6d;
   
-  /* Glowing Accent Colors */
-  --accent-cyan: #00f2fe;
-  --accent-purple: #8a2be2;
-  --accent-pink: #ff007f;
+  /* Soft Organic Accent Colors */
+  --accent-cyan: #1e7b78;     /* Calming Sage Teal */
+  --accent-purple: #7047c6;   /* Friendly Lavender */
+  --accent-pink: #c6357d;     /* Soft Berry Rose */
+  --accent-gold: #c68f23;     /* Warm Gold Honey */
   
   /* State Colors */
-  --status-pending: #ff5e62;
-  --status-inprogress: #ff9900;
-  --status-resolved: #39ff14;
+  --status-pending: #df3b3b;    /* Warm Coral Red */
+  --status-inprogress: #cf711f; /* Carrot Orange */
+  --status-resolved: #2b8c56;   /* Meadow Green */
   
-  --severity-low: #3b82f6;
-  --severity-medium: #f59e0b;
-  --severity-high: #ef4444;
+  --severity-low: #2b78c5;
+  --severity-medium: #cf711f;
+  --severity-high: #df3b3b;
 
-  --font-title: 'Outfit', sans-serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-title: 'Lora', Georgia, serif;
+  --font-body: 'Quicksand', system-ui, -apple-system, sans-serif;
   
-  --shadow-neon-cyan: 0 0 15px rgba(0, 242, 254, 0.3);
-  --shadow-neon-purple: 0 0 15px rgba(138, 43, 226, 0.3);
-  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --shadow-neon-cyan: 0 4px 15px rgba(30, 123, 120, 0.15);
+  --shadow-neon-purple: 0 4px 15px rgba(112, 71, 198, 0.15);
+  --shadow-glass: 0 8px 30px rgba(182, 163, 142, 0.08);
   
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -57,7 +58,7 @@ html, body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: var(--text-primary);
 }
 
@@ -69,18 +70,18 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--bg-main);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(140, 123, 109, 0.20);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(140, 123, 109, 0.35);
 }
 
 /* Premium Glass Container Utilities */
 .glass-panel {
   background: var(--panel-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--panel-border);
   border-radius: 16px;
   box-shadow: var(--shadow-glass);
@@ -93,19 +94,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .glass-panel-glow-cyan:hover {
   box-shadow: var(--shadow-neon-cyan), var(--shadow-glass);
-  border-color: rgba(0, 242, 254, 0.4);
+  border-color: rgba(30, 123, 120, 0.4);
 }
 
 .glass-panel-glow-purple:hover {
   box-shadow: var(--shadow-neon-purple), var(--shadow-glass);
-  border-color: rgba(138, 43, 226, 0.4);
+  border-color: rgba(112, 71, 198, 0.4);
 }
 
 /* Glow Accent Button Styles */
 .btn-neon-cyan {
-  background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-  color: #060913;
-  font-family: var(--font-title);
+  background: linear-gradient(135deg, #1e7b78 0%, #175e5c 100%);
+  color: #ffffff;
+  font-family: var(--font-body);
   font-weight: 600;
   padding: 12px 24px;
   border: none;
@@ -121,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-neon-cyan:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+  box-shadow: 0 6px 20px rgba(30, 123, 120, 0.35);
 }
 
 .btn-neon-cyan:active {
@@ -129,9 +130,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-neon-purple {
-  background: linear-gradient(135deg, var(--accent-purple) 0%, #a855f7 100%);
+  background: linear-gradient(135deg, var(--accent-purple) 0%, #5d36ab 100%);
   color: white;
-  font-family: var(--font-title);
+  font-family: var(--font-body);
   font-weight: 600;
   padding: 12px 24px;
   border: none;
@@ -147,14 +148,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-neon-purple:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 25px rgba(138, 43, 226, 0.6);
+  box-shadow: 0 6px 20px rgba(112, 71, 198, 0.35);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(28, 20, 15, 0.03);
   border: 1px solid var(--panel-border);
   color: var(--text-primary);
-  font-family: var(--font-title);
+  font-family: var(--font-body);
   font-weight: 600;
   padding: 12px 24px;
   border-radius: 8px;
@@ -167,19 +168,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(28, 20, 15, 0.06);
+  border-color: rgba(28, 20, 15, 0.15);
 }
 
 /* Animations */
 @keyframes pulseGlow {
   0%, 100% {
-    opacity: 0.6;
-    box-shadow: 0 0 5px rgba(239, 68, 68, 0.2);
+    opacity: 0.8;
+    box-shadow: 0 0 5px rgba(223, 59, 59, 0.15);
   }
   50% {
     opacity: 1;
-    box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+    box-shadow: 0 0 15px rgba(223, 59, 59, 0.4);
   }
 }
 
@@ -218,7 +219,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-input, .form-textarea, .form-select {
   width: 100%;
   padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.03);
+  background: #ffffff;
   border: 1px solid var(--panel-border);
   border-radius: 8px;
   color: var(--text-primary);
@@ -230,11 +231,11 @@ h1, h2, h3, h4, h5, h6 {
 .form-input:focus, .form-textarea:focus, .form-select:focus {
   outline: none;
   border-color: var(--accent-cyan);
-  box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
-  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 10px rgba(30, 123, 120, 0.15);
+  background: #ffffff;
 }
 
 .form-select option {
-  background: #0f1322;
+  background: #ffffff;
   color: var(--text-primary);
 }

@@ -9,8 +9,8 @@
   width: calc(100% - 32px);
   padding: 10px 24px;
   border-radius: 16px !important;
-  background: rgba(13, 17, 30, 0.75) !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  border: 1px solid var(--panel-border) !important;
 }
 
 .container {
@@ -32,7 +32,7 @@
   height: 10px;
   background: var(--accent-cyan);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
   position: relative;
   display: inline-block;
 }
@@ -58,7 +58,7 @@
 }
 
 .logoAccent {
-  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-pink) 100%);
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -84,22 +84,22 @@
 
 .navLink:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(28, 20, 15, 0.04);
 }
 
 .active {
   color: var(--accent-cyan) !important;
-  background: rgba(0, 242, 254, 0.08) !important;
+  background: rgba(30, 123, 120, 0.08) !important;
 }
 
 .adminLink:hover {
-  background: rgba(138, 43, 226, 0.1);
+  background: rgba(112, 71, 198, 0.06);
 }
 
 .activeAdmin {
-  color: #c084fc !important;
-  background: rgba(138, 43, 226, 0.15) !important;
-  border: 1px solid rgba(138, 43, 226, 0.2);
+  color: var(--accent-purple) !important;
+  background: rgba(112, 71, 198, 0.08) !important;
+  border: 1px solid rgba(112, 71, 198, 0.15);
 }
 
 .actions {
@@ -111,10 +111,10 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(28, 20, 15, 0.02);
   padding: 6px 6px 6px 14px;
   border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(28, 20, 15, 0.06);
 }
 
 .userInfo {
@@ -137,9 +137,9 @@
 }
 
 .logoutBtn {
-  background: rgba(255, 94, 98, 0.1);
-  border: 1px solid rgba(255, 94, 98, 0.2);
-  color: #ff5e62;
+  background: rgba(223, 59, 59, 0.08);
+  border: 1px solid rgba(223, 59, 59, 0.15);
+  color: #df3b3b;
   cursor: pointer;
   width: 32px;
   height: 32px;
@@ -151,7 +151,7 @@
 }
 
 .logoutBtn:hover {
-  background: #ff5e62;
+  background: #df3b3b;
   color: white;
   transform: scale(1.05);
 }
@@ -190,8 +190,8 @@
     right: -1px;
     margin-top: 10px;
     padding: 16px;
-    background: rgba(13, 17, 30, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid var(--panel-border);
     border-radius: 16px;
     box-shadow: var(--shadow-glass);
     backdrop-filter: blur(20px);
@@ -210,22 +210,22 @@
   }
 
   .mobileNavLink:hover {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(28, 20, 15, 0.04);
     color: var(--text-primary);
   }
 
   .mobileActive {
-    background: rgba(0, 242, 254, 0.08);
+    background: rgba(30, 123, 120, 0.08);
     color: var(--accent-cyan);
   }
 
   .mobileActiveAdmin {
-    background: rgba(138, 43, 226, 0.15);
-    color: #c084fc;
+    background: rgba(112, 71, 198, 0.08);
+    color: var(--accent-purple);
   }
 
   .mobileUserArea {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid rgba(28, 20, 15, 0.06);
     padding-top: 14px;
     margin-top: 4px;
   }
@@ -256,8 +256,8 @@
     align-items: center;
     gap: 8px;
     background: transparent;
-    border: 1px solid rgba(255, 94, 98, 0.3);
-    color: #ff5e62;
+    border: 1px solid rgba(223, 59, 59, 0.25);
+    color: #df3b3b;
     padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
@@ -267,6 +267,6 @@
   }
 
   .mobileLogoutBtn:hover {
-    background: rgba(255, 94, 98, 0.1);
+    background: rgba(223, 59, 59, 0.08);
   }
 }
