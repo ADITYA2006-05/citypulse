@@ -1,15 +1,26 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 function getAuthOptions() {
-  const clientId = (process.env.GOOGLE_CLIENT_ID || 'dummy-google-client-id').trim();
-  console.log(`[NextAuth Debug] Raw GOOGLE_CLIENT_ID: [${process.env.GOOGLE_CLIENT_ID}] (length: ${process.env.GOOGLE_CLIENT_ID?.length})`);
-  console.log(`[NextAuth Debug] Trimmed Client ID: [${clientId}] (length: ${clientId.length})`);
+  let cfEnv: any = {};
+  try {
+    cfEnv = getCloudflareContext().env;
+  } catch (e) {
+    console.warn('[NextAuth] Failed to get Cloudflare Context, falling back to process.env:', e);
+  }
+
+  const clientId = (process.env.GOOGLE_CLIENT_ID || cfEnv.GOOGLE_CLIENT_ID || 'dummy-google-client-id').trim();
+  const clientSecret = (process.env.GOOGLE_CLIENT_SECRET || cfEnv.GOOGLE_CLIENT_SECRET || 'dummy-google-client-secret').trim();
+  const secret = (process.env.NEXTAUTH_SECRET || cfEnv.NEXTAUTH_SECRET || 'citypulse-super-secret-crypt-key-32chars-long').trim();
+
+  console.log(`[NextAuth Debug] Using Client ID: [${clientId}] (length: ${clientId.length})`);
+
   return {
     providers: [
       GoogleProvider({
         clientId,
-        clientSecret: (process.env.GOOGLE_CLIENT_SECRET || 'dummy-google-client-secret').trim(),
+        clientSecret,
       }),
     ],
     callbacks: {
@@ -30,7 +41,7 @@ function getAuthOptions() {
     pages: {
       signIn: '/login',
     },
-    secret: process.env.NEXTAUTH_SECRET || 'citypulse-super-secret-crypt-key-32chars-long',
+    secret,
   };
 }
 
