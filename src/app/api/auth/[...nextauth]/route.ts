@@ -2,13 +2,14 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 function getAuthOptions() {
-  const clientId = process.env.GOOGLE_CLIENT_ID || 'dummy-google-client-id';
-  console.log(`[NextAuth] Resolved GOOGLE_CLIENT_ID: ${clientId.substring(0, 10)}... (length: ${clientId.length})`);
+  const clientId = (process.env.GOOGLE_CLIENT_ID || 'dummy-google-client-id').trim();
+  console.log(`[NextAuth Debug] Raw GOOGLE_CLIENT_ID: [${process.env.GOOGLE_CLIENT_ID}] (length: ${process.env.GOOGLE_CLIENT_ID?.length})`);
+  console.log(`[NextAuth Debug] Trimmed Client ID: [${clientId}] (length: ${clientId.length})`);
   return {
     providers: [
       GoogleProvider({
         clientId,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'dummy-google-client-secret',
+        clientSecret: (process.env.GOOGLE_CLIENT_SECRET || 'dummy-google-client-secret').trim(),
       }),
     ],
     callbacks: {
