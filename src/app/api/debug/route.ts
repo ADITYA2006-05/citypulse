@@ -1,15 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: NextRequest) {
   let cfEnv: any = {};
+  let contextError: string | null = null;
+  
   try {
-    cfEnv = getCloudflareContext().env;
-  } catch (e) {
-    // ignore
+    const context = getCloudflareContext();
+    cfEnv = context.env || {};
+  } catch (e: any) {
+    contextError = e.message || String(e);
   }
 
   return NextResponse.json({
+    contextError,
     processEnv: {
       GOOGLE_CLIENT_ID: {
         exists: !!process.env.GOOGLE_CLIENT_ID,
